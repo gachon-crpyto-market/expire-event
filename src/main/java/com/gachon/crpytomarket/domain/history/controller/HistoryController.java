@@ -1,5 +1,6 @@
 package com.gachon.crpytomarket.domain.history.controller;
 
+import com.gachon.crpytomarket.domain.history.dto.request.CreateUserHistoryRequestDto;
 import com.gachon.crpytomarket.domain.history.dto.request.SaveHistoryRequestDto;
 import com.gachon.crpytomarket.domain.history.service.HistoryService;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +20,11 @@ public class HistoryController {
     public String saveHistory(@RequestBody SaveHistoryRequestDto request) {
         return historyService.saveHistory(request);
     }
+
+//    @PostMapping("/new-user")
+//    public String createUserHistory(@RequestBody CreateUserHistoryRequestDto request) {
+//        return historyService.createUserHistory(request);
+//    }
 
 //    public String getAskHistory() {
 //

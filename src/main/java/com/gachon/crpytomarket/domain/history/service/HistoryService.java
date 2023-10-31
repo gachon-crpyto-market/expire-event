@@ -1,50 +1,41 @@
 package com.gachon.crpytomarket.domain.history.service;
 
-import com.gachon.crpytomarket.domain.history.dto.request.SaveHistoryDto;
+import com.gachon.crpytomarket.common.error.ApplicationException;
+import com.gachon.crpytomarket.domain.history.dto.request.CreateUserHistoryRequestDto;
 import com.gachon.crpytomarket.domain.history.dto.request.SaveHistoryRequestDto;
 import com.gachon.crpytomarket.domain.history.entity.AskHistory;
 import com.gachon.crpytomarket.domain.history.entity.BidHistory;
 import com.gachon.crpytomarket.domain.history.entity.History;
-import com.gachon.crpytomarket.domain.history.repository.HistoryRepository;
+import com.gachon.crpytomarket.domain.history.repository.AskHistoryRepository;
+import com.gachon.crpytomarket.domain.history.repository.BidHistoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import static com.gachon.crpytomarket.common.error.ErrorCode.USER_EXIST;
+import static com.gachon.crpytomarket.common.error.ErrorCode.USER_NOT_FOUND;
 
 @RequiredArgsConstructor
 @Service
 public class HistoryService {
 
-    private final HistoryRepository historyRepository;
+    private final BidHistoryRepository bidHistoryRepository;
+    private final AskHistoryRepository askHistoryRepository;
 
     public String saveHistory(SaveHistoryRequestDto request) {
-        request.getData().forEach(this::saveEachHistory);
+        saveBidHistory(request);
+        saveAskHistory(request);
+
         return "hi";
     }
 
-    private void saveEachHistory(SaveHistoryDto request) {
-        History buyerHistory = getBuyerHistory(request.getBuyerId());
-        History sellerHistory = getSellerHistory(request.getSellerId());
-
-        updateBuyerHistory(buyerHistory, request);
-        updateSellerHistory(sellerHistory, request);
-    }
-
-    private void updateBuyerHistory(History buyerHistory, SaveHistoryDto request) {
+    private void saveBidHistory(SaveHistoryRequestDto request) {
         BidHistory bidHistory = BidHistory.createBidHistory(request);
-        buyerHistory.updateBidHistory(bidHistory);
+        bidHistoryRepository.save(bidHistory);
     }
 
-    private void updateSellerHistory(History sellerHistory, SaveHistoryDto request) {
+    private void saveAskHistory(SaveHistoryRequestDto request) {
         AskHistory askHistory = AskHistory.createAskHistory(request);
-        sellerHistory.updateAskHistory(askHistory);
+        askHistoryRepository.save(askHistory);
     }
 
-    public History getBuyerHistory(Long buyerId) {
-        return historyRepository.findByUserId(buyerId);
-    }
-
-    public History getSellerHistory(Long sellerId) {
-        return historyRepository.findByUserId(sellerId);
-    }
 }

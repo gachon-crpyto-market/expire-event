@@ -11,6 +11,7 @@ public enum ErrorCode {
     /**
      *  400 Bad Request
      */
+    USER_EXIST(HttpStatus.BAD_REQUEST, "유저 History Document가 이미 존재합니다."),
 
     /**
      *  401 Unauthorized
