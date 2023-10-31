@@ -6,9 +6,9 @@ import java.util.Date;
 
 @Getter
 public class SaveHistoryDto {
-    private Long buyerId;
+    private String buyerId;
 
-    private Long sellerId;
+    private String sellerId;
 
     private Integer price;
 

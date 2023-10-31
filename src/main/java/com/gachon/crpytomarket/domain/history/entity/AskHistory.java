@@ -17,7 +17,7 @@ public class AskHistory {
     private ObjectId fixedDepositId;
 
     @Field(name = "buyer_id")
-    private Long buyerId;
+    private String buyerId;
 
     @Field(name = "price")
     private Integer price;

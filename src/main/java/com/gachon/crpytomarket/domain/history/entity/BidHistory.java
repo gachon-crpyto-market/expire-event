@@ -17,7 +17,7 @@ public class BidHistory {
 
 
     @Field(name = "seller_id")
-    private Long sellerId;
+    private String sellerId;
 
     @Field(name = "price")
     private Integer price;

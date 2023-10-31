@@ -22,7 +22,7 @@ public class History {
     private String id;
 
     @Field(name = "user_id")
-    private Long userId;
+    private String userId;
 
     @Field(name = "bid_history")
     private List<BidHistory> bidHistories = new ArrayList<>();
