@@ -1,19 +1,20 @@
 package com.gachon.crpytomarket.domain.history.service;
 
 import com.gachon.crpytomarket.domain.history.dto.request.SaveHistoryRequestDto;
-import com.gachon.crpytomarket.domain.history.entity.AskHistory;
-import com.gachon.crpytomarket.domain.history.entity.BidHistory;
-import com.gachon.crpytomarket.domain.history.repository.AskHistoryRepository;
-import com.gachon.crpytomarket.domain.history.repository.BidHistoryRepository;
+import com.gachon.crpytomarket.domain.history.dto.response.FindUserAllHistoryResponseDto;
+import com.gachon.crpytomarket.domain.history.entity.History;
+import com.gachon.crpytomarket.domain.history.repository.HistoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
 public class HistoryService {
 
-    private final BidHistoryRepository bidHistoryRepository;
-    private final AskHistoryRepository askHistoryRepository;
+    private final HistoryRepository historyRepository;
 
     public String saveHistory(SaveHistoryRequestDto request) {
         saveBidHistory(request);
@@ -22,14 +23,26 @@ public class HistoryService {
         return "hi";
     }
 
+    public List<FindUserAllHistoryResponseDto> findAllUserHistories(String userId) {
+        List<History> userHistories = getUserHistories(userId);
+
+        return userHistories.stream()
+                .map(FindUserAllHistoryResponseDto::of)
+                .collect(Collectors.toList());
+    }
+
     private void saveBidHistory(SaveHistoryRequestDto request) {
-        BidHistory bidHistory = BidHistory.createBidHistory(request);
-        bidHistoryRepository.save(bidHistory);
+        History bidHistory = History.createBidHistory(request);
+        historyRepository.save(bidHistory);
     }
 
     private void saveAskHistory(SaveHistoryRequestDto request) {
-        AskHistory askHistory = AskHistory.createAskHistory(request);
-        askHistoryRepository.save(askHistory);
+        History askHistory = History.createAskHistory(request);
+        historyRepository.save(askHistory);
+    }
+
+    private List<History> getUserHistories(String userId) {
+        return historyRepository.findAllByUserIdOrderByTimestampDesc(userId);
     }
 
 }
