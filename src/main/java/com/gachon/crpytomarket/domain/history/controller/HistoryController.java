@@ -3,6 +3,7 @@ package com.gachon.crpytomarket.domain.history.controller;
 import com.gachon.crpytomarket.domain.history.dto.request.CreateUserHistoryRequestDto;
 import com.gachon.crpytomarket.domain.history.dto.request.SaveHistoryRequestDto;
 import com.gachon.crpytomarket.domain.history.dto.response.FindUserAllHistoryResponseDto;
+import com.gachon.crpytomarket.domain.history.dto.response.RecentTradeHistoryResponseDto;
 import com.gachon.crpytomarket.domain.history.service.HistoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -24,6 +25,11 @@ public class HistoryController {
     @GetMapping
     public List<FindUserAllHistoryResponseDto> findUserHistories(@RequestParam String userId) {
         return historyService.findAllUserHistories(userId);
+    }
+
+    @GetMapping("/recent")
+    public List<RecentTradeHistoryResponseDto> getRecentHistories() {
+        return historyService.getRecentHistories();
     }
 
 //    @PostMapping("/new-user")

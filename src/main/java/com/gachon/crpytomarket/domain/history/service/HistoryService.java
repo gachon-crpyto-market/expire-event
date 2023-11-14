@@ -2,6 +2,7 @@ package com.gachon.crpytomarket.domain.history.service;
 
 import com.gachon.crpytomarket.domain.history.dto.request.SaveHistoryRequestDto;
 import com.gachon.crpytomarket.domain.history.dto.response.FindUserAllHistoryResponseDto;
+import com.gachon.crpytomarket.domain.history.dto.response.RecentTradeHistoryResponseDto;
 import com.gachon.crpytomarket.domain.history.entity.History;
 import com.gachon.crpytomarket.domain.history.repository.HistoryRepository;
 import lombok.RequiredArgsConstructor;
@@ -29,6 +30,17 @@ public class HistoryService {
         return userHistories.stream()
                 .map(FindUserAllHistoryResponseDto::of)
                 .collect(Collectors.toList());
+    }
+
+    public List<RecentTradeHistoryResponseDto> getRecentHistories() {
+        List<History> histories = getRecentTradePrices();
+        return histories.stream()
+                .map(RecentTradeHistoryResponseDto::of)
+                .collect(Collectors.toList());
+    }
+
+    private List<History> getRecentTradePrices() {
+        return historyRepository.findRecentTradePrices();
     }
 
     private void saveBidHistory(SaveHistoryRequestDto request) {
