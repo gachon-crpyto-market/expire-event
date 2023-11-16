@@ -3,6 +3,7 @@ package com.gachon.crpytomarket.domain.history.controller;
 import com.gachon.crpytomarket.domain.history.dto.request.CreateUserHistoryRequestDto;
 import com.gachon.crpytomarket.domain.history.dto.request.SaveHistoryRequestDto;
 import com.gachon.crpytomarket.domain.history.dto.response.FindUserAllHistoryResponseDto;
+import com.gachon.crpytomarket.domain.history.dto.response.GetLastTenDaysResponseDto;
 import com.gachon.crpytomarket.domain.history.dto.response.RecentTradeHistoryResponseDto;
 import com.gachon.crpytomarket.domain.history.service.HistoryService;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +17,11 @@ import java.util.List;
 public class HistoryController {
 
     private final HistoryService historyService;
+
+    @GetMapping("/test")
+    public String testString(){
+        return "test";
+    }
 
     @PostMapping
     public String saveHistory(@RequestBody SaveHistoryRequestDto request) {
@@ -31,6 +37,9 @@ public class HistoryController {
     public List<RecentTradeHistoryResponseDto> getRecentHistories() {
         return historyService.getRecentHistories();
     }
+
+//    @GetMapping("/day-histories")
+//    public List<GetLastTenDaysResponseDto> getDayHistories()
 
 //    @PostMapping("/new-user")
 //    public String createUserHistory(@RequestBody CreateUserHistoryRequestDto request) {
