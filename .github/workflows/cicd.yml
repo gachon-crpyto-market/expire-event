@@ -48,11 +48,12 @@ jobs:
       - name: 🐧 docker hub에서 pull 후 deploy합니다.
         uses: appleboy/ssh-action@master
         with:
-          username: ubuntu
+          username: portal
+          password: ${{ secrets.PASSWORD }}
           host: ${{ secrets.AWS_HOST }}
           key: ${{ secrets.AWS_KEY }}
           script: |
             sudo docker pull ${{ secrets.DOCKER_REPOSITORY }}/${{ secrets.DOCKER_IMAGE }}
-            chmod 777 ./deploy.sh
-            ./deploy.sh
+            chmod 777 ./deploy-history.sh
+            ./deploy-history.sh
             docker image prune -f
