@@ -54,5 +54,5 @@ jobs:
           key: ${{ secrets.AWS_KEY }}
           script: |
             docker pull ${{ secrets.DOCKER_REPOSITORY }}/${{ secrets.DOCKER_IMAGE }}
-            chmod 777 ./deploy-history.sh
-            ./deploy-history.sh
+            chmod 777 ./deploy-kube-history.sh
+            ./deploy-kube-history.sh
