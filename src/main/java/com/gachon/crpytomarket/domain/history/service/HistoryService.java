@@ -16,7 +16,6 @@ import java.util.stream.Collectors;
 public class HistoryService {
 
     private final HistoryRepository historyRepository;
-
     public String saveHistory(SaveHistoryRequestDto request) {
         saveBidHistory(request);
         saveAskHistory(request);
