@@ -4,8 +4,6 @@ import com.gachon.crpytomarket.domain.history.entity.AskHistory;
 import com.gachon.crpytomarket.domain.history.entity.History;
 import org.springframework.data.mongodb.repository.Aggregation;
 import org.springframework.data.mongodb.repository.MongoRepository;
-import org.springframework.data.mongodb.repository.Query;
-
 import java.util.List;
 
 public interface HistoryRepository extends MongoRepository<History, String> {
@@ -19,4 +17,7 @@ public interface HistoryRepository extends MongoRepository<History, String> {
     })
     List<History> findRecentTradePrices();
 
+
+//    @Query(value = "{timestamp : {$gte : ?0, $lt :  ?1}}", sort = "{ timestamp : 1}")
+//    List<History> findHistoryTradeByDate(LocalDate startDate, LocalDate endDate);
 }

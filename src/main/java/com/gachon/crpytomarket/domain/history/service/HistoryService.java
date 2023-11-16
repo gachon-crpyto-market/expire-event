@@ -39,6 +39,8 @@ public class HistoryService {
                 .collect(Collectors.toList());
     }
 
+//    public List<>
+
     private List<History> getRecentTradePrices() {
         return historyRepository.findRecentTradePrices();
     }
