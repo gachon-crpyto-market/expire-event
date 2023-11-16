@@ -20,7 +20,7 @@ public class HistoryService {
         saveBidHistory(request);
         saveAskHistory(request);
 
-        return "hi";
+        return "바껴라 얍";
     }
 
     public List<FindUserAllHistoryResponseDto> findAllUserHistories(String userId) {
