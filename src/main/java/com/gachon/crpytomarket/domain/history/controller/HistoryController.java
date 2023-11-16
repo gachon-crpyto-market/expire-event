@@ -20,7 +20,7 @@ public class HistoryController {
 
     @GetMapping("/test")
     public String testString(){
-        return "test";
+        return "바껴라 얍!!!!!";
     }
 
     @PostMapping
