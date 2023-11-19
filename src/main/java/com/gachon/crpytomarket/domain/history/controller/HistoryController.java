@@ -2,9 +2,7 @@ package com.gachon.crpytomarket.domain.history.controller;
 
 import com.gachon.crpytomarket.domain.history.dto.request.CreateUserHistoryRequestDto;
 import com.gachon.crpytomarket.domain.history.dto.request.SaveHistoryRequestDto;
-import com.gachon.crpytomarket.domain.history.dto.response.FindUserAllHistoryResponseDto;
-import com.gachon.crpytomarket.domain.history.dto.response.GetLastTenDaysResponseDto;
-import com.gachon.crpytomarket.domain.history.dto.response.RecentTradeHistoryResponseDto;
+import com.gachon.crpytomarket.domain.history.dto.response.*;
 import com.gachon.crpytomarket.domain.history.service.HistoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -36,6 +34,16 @@ public class HistoryController {
     @GetMapping("/recent")
     public List<RecentTradeHistoryResponseDto> getRecentHistories() {
         return historyService.getRecentHistories();
+    }
+
+    @GetMapping("/il-bong")
+    public List<IlBongResponseDto> getIlBongData() {
+        return historyService.getIlBongData();
+    }
+
+    @GetMapping("/il-bong-volume")
+    public List<IlBongVolumeResponseDto> getIlBongVolumeData() {
+        return historyService.getIlBongVolumeData();
     }
 
 //    @GetMapping("/day-histories")
